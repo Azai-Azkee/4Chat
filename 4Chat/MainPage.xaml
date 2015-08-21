@@ -2,12 +2,68 @@
     x:Class="_4Chat.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:_4Chat"
+    xmlns:local="using:You_Are_not_Alone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:WinRT="using:Microsoft.Advertising.WinRT.UI"
+	mc:Ignorable="d" Loaded="Page_Loaded">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Viewbox>
+        <Grid x:Name="MainGrid">
+            <SplitView Margin="0,0,0,0" Canvas.ZIndex="2"   HorizontalContentAlignment="Left" HorizontalAlignment="Left"  
+							x:Name="Splitter" Background="Transparent"
+							DisplayMode="CompactOverlay"   PanePlacement="Left" CompactPaneLength="48" OpenPaneLength="240">
+				<SplitView.Pane>
+					<Grid HorizontalAlignment="Left"  >
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
 
-    </Grid>
+                        <Button Background="Transparent" BorderThickness="0" Width="48" Height="48" x:Name="HamburguerButton"  
+								Tapped="HamburguerButton_Tapped" VerticalAlignment="Top"   Foreground="White"  >
+                            <Button.Content>
+                                <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="" Foreground="Black" />
+                            </Button.Content>
+                        </Button>
+                        <ListView Grid.Row="1" HorizontalAlignment="Left">
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Orientation="Horizontal" Width="240" HorizontalAlignment="Stretch" Height="48">
+										<FontIcon Margin="2,0,0,0" FontFamily="Segoe MDL2 Assets" Glyph="" />
+										<TextBlock Margin="24,0,0,0" Text="International" VerticalAlignment="Center"/>
+									</StackPanel>
+								</DataTemplate>
+							</ListView.ItemTemplate>
+							<ListView.Items>
+								<x:Int32>1</x:Int32>
+								<x:Int32>1</x:Int32>
+								<x:Int32>1</x:Int32>
+							</ListView.Items>
+						</ListView>
+					</Grid>
+				</SplitView.Pane>
+			</SplitView>
+		
+
+			<RelativePanel Grid.Column="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+						   Margin="48,0,0,0">
+				<Border x:Name="HistoryBoxBorder" RelativePanel.Above="SubmitPanel" 
+						RelativePanel.AlignHorizontalCenterWithPanel="True" 
+						BorderBrush="Black" BorderThickness="2">
+					<WebView x:Name="HistoryBox" HorizontalAlignment="Center"
+							   VerticalAlignment="Center" Height="500" Width="729"/>
+				</Border>
+				<StackPanel RelativePanel.AlignBottomWithPanel="True" 
+							RelativePanel.AlignHorizontalCenterWithPanel="True"
+							x:Name="SubmitPanel" Orientation="Horizontal" Margin="0,35,0,30">
+					<TextBox x:Name="InputBox" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" 
+							 Width="583" Height="40" FontSize="18.667" KeyUp="InputBox_KeyUp" PlaceholderText="Type here..."/>
+					<Button x:Name="SendButton" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+							Width="126" Height="40" Click="button_Click" Content="Send" Background="#00000000" BorderBrush="Black" BorderThickness="3" Margin="20,0,0,0" FontSize="18.667" FontWeight="Bold"/>
+				</StackPanel>
+			</RelativePanel>
+        </Grid>
+    </Viewbox>
 </Page>
